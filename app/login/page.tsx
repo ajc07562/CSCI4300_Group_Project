@@ -1,92 +1,48 @@
 'use client';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { toggleLogin } from '../../lib/data';
 import { useAuth } from '../../context/AuthContext';
 
-export default function Login() {
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
   const { login } = useAuth();
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    yearAndDorm: ''
-  });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login form submitted with data:', formData);
-
-    login(formData.firstName); // sets userName into AuthContext
-    toggleLogin(); // if you still want this logic
-    router.push('/recipes');
+    const data = await login(email, password);
+    if (data.message) {
+      router.push('/recipes'); // or wherever you want to redirect
+    } else {
+      setError(data.error || 'Login failed');
+    }
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit} className="form-container">
-        <h1>Login/Signup</h1>
+    <div className="form-container">
+      <h1 className="text-2xl font-bold mb-4">Login</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
+        {error && <p className="text-red-500">{error}</p>}
 
-        <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="yearAndDorm">Year and Dorm</label>
-          <input
-            type="text"
-            id="yearAndDorm"
-            name="yearAndDorm"
-            value={formData.yearAndDorm}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn">Submit</button>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          className="border px-4 py-2 rounded"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          className="border px-4 py-2 rounded"
+        />
+        <button type="submit" className="btn">Login</button>
       </form>
     </div>
   );

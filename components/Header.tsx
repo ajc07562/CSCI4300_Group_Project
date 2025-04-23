@@ -16,13 +16,13 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-container">
-        {/* Left side: Logo */}
+        {/* Logo */}
         <div className="logo">
           <Image src="/images/logo.png" alt="Campus Cravings Logo" width={30} height={30} />
           <Link href="/" className="logo-text">Campus Cravings</Link>
         </div>
 
-        {/* Right side: Navigation links */}
+        {/* Nav Links */}
         <nav className="nav-links">
           <Link href="/">Home</Link>
           <Link href="/recipes">Recipes</Link>
@@ -34,7 +34,10 @@ export default function Header() {
           {isLoggedIn ? (
             <button onClick={handleLogout} className="btn">Logout</button>
           ) : (
-            <Link href="/login" className="btn">Login/Signup</Link>
+            <>
+              <Link href="/login" className="btn">Login</Link>
+              <Link href="/signup" className="btn ml-2">Signup</Link>
+            </>
           )}
         </nav>
       </div>

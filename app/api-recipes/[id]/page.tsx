@@ -1,7 +1,7 @@
 // app/api-recipes/[id]/page.tsx
 import { notFound } from 'next/navigation';
 
-const apiKey = 'b1a3206262e744e6935dffc691e665ef';
+const apiKey = '40e42b55ba2d4acc924622100dcd77ea';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   return {

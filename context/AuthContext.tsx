@@ -1,17 +1,18 @@
+// context/AuthContext.tsx
 'use client';
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-interface AuthContextType {
+type AuthContextType = {
   isLoggedIn: boolean;
   userName: string | null;
-  login: (name: string) => void;
+  login: (email: string, password: string) => Promise<any>;
   logout: () => void;
-}
+};
 
 const AuthContext = createContext<AuthContextType>({
   isLoggedIn: false,
   userName: null,
-  login: () => {},
+  login: async () => {},
   logout: () => {},
 });
 
@@ -20,23 +21,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    // Load login state from localStorage
     const storedName = localStorage.getItem('userName');
-    if (storedName) {
-      setUserName(storedName);
-      setIsLoggedIn(true);
-    }
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    setUserName(storedName);
+    setIsLoggedIn(loggedIn);
   }, []);
 
-  const login = (name: string) => {
-    setUserName(name);
-    setIsLoggedIn(true);
-    localStorage.setItem('userName', name);
+  const login = async (email: string, password: string) => {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setIsLoggedIn(true);
+      setUserName(data.username);
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userName', data.username);
+    }
+
+    return data;
   };
 
   const logout = () => {
-    setUserName(null);
     setIsLoggedIn(false);
+    setUserName(null);
+    localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userName');
   };
 
