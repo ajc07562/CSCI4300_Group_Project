@@ -16,21 +16,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/login/page.js"
     ],
-    "/recipes/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/recipes/page.js"
-    ],
-    "/api/search/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/search/route.js"
-    ],
-    "/api/recipes/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/recipes/route.js"
-    ],
     "/signup/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -41,40 +26,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/signup/route.js"
     ],
-    "/about/page": [
+    "/api/login/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/about/page.js"
+      "static/chunks/app/api/login/route.js"
     ],
-    "/recipes/[id]/page": [
+    "/recipes/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/recipes/[id]/page.js"
+      "static/chunks/app/recipes/page.js"
     ],
-    "/api/recipes/[id]/route": [
+    "/api/recipes/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/recipes/[id]/route.js"
+      "static/chunks/app/api/recipes/route.js"
     ],
-    "/recipes/edit/[id]/page": [
+    "/api/search/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/recipes/edit/[id]/page.js"
-    ],
-    "/recipes/add/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/recipes/add/page.js"
+      "static/chunks/app/api/search/route.js"
     ],
     "/api-recipes/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api-recipes/[id]/page.js"
-    ],
-    "/api/login/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/login/route.js"
     ]
   }
 }

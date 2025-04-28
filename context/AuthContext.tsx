@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (res.ok) {
       setIsLoggedIn(true);
-      setUserName(data.username);
+      setUserName(data.user.username); // 👈 FIXED
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userName', data.username);
+      localStorage.setItem('userName', data.user.username); // 👈 FIXED
     }
 
     return data;

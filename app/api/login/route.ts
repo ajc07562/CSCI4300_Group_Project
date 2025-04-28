@@ -19,12 +19,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Incorrect password' }, { status: 401 });
     }
 
-    return NextResponse.json({ message: 'Login successful', user });
+    return NextResponse.json({
+      message: 'Login successful',
+      user: {
+        id: user._id,
+        username: user.username,
+      }
+    });
   } catch (err) {
     console.error('Login error:', err);
     return NextResponse.json({ error: 'Login failed' }, { status: 500 });
   }
 }
+
 
 
 

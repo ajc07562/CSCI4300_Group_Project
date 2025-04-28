@@ -1,11 +1,10 @@
 {
+  "/api/login/route": "app/api/login/route.js",
   "/api/recipes/route": "app/api/recipes/route.js",
   "/api/search/route": "app/api/search/route.js",
-  "/api/recipes/[id]/route": "app/api/recipes/[id]/route.js",
-  "/recipes/page": "app/recipes/page.js",
-  "/recipes/edit/[id]/page": "app/recipes/edit/[id]/page.js",
   "/page": "app/page.js",
+  "/login/page": "app/login/page.js",
   "/api-recipes/[id]/page": "app/api-recipes/[id]/page.js",
-  "/recipes/[id]/page": "app/recipes/[id]/page.js",
-  "/recipes/add/page": "app/recipes/add/page.js"
+  "/signup/page": "app/signup/page.js",
+  "/recipes/page": "app/recipes/page.js"
 }
